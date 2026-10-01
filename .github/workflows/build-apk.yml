@@ -28,10 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
 
-    # 注意：本仓库的 Gradle 工程位于 MagnetRush/ 子目录下
-    defaults:
-      run:
-        working-directory: MagnetRush
 
     steps:
       - name: Checkout
@@ -87,7 +83,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MagnetRush-APK-${{ steps.abis.outputs.value }}
-          path: MagnetRush/out/*.apk
+          path: out/*.apk
           if-no-files-found: error
           retention-days: 90
 
@@ -95,6 +91,6 @@ jobs:
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: MagnetRush/out/*.apk
+          files: out/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
