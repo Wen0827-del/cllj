@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+      用 Material3 的 DayNight 主题：深浅色自动跟随系统。
+
+      注意：这里刻意不设置 colorPrimaryDark / android:statusBarColor ——
+      那两个是 Material2 时代的属性，Material3 主题里不存在，
+      引用它们会直接导致 aapt2 资源链接失败（AAPT: error: resource attr/colorPrimaryDark not found）。
+    -->
+    <style name="Theme.MagnetRush" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+    </style>
+
+</resources>

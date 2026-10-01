@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MagnetRush</string>
+
+    <!-- ============ 主界面 ============ -->
+    <string name="empty_title">还没有下载任务</string>
+    <string name="empty_hint">点右下角 + 粘贴磁力链接\n也可以在浏览器里点 magnet: 链接直接唤起本应用</string>
+    <string name="summary_format">总 ↓ %1$s　↑ %2$s　DHT 节点 %3$d　活动任务 %4$d</string>
+
+    <!-- ============ 操作 ============ -->
+    <string name="action_add">添加任务</string>
+    <string name="action_pause">暂停</string>
+    <string name="action_resume">继续</string>
+    <string name="action_pause_all">全部暂停</string>
+    <string name="action_resume_all">全部继续</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_start">开始下载</string>
+    <string name="action_delete">删除任务</string>
+    <string name="action_recheck">重新校验</string>
+    <string name="action_copy_magnet">复制磁链</string>
+
+    <!-- ============ 添加对话框 ============ -->
+    <string name="add_title">添加下载任务</string>
+    <string name="add_hint_magnet">粘贴 magnet: 磁力链接或 40 位 info-hash</string>
+    <string name="add_pick_torrent_file">选择 .torrent 文件…</string>
+    <string name="add_picked_file">已选择：%1$s</string>
+    <string name="add_sequential">顺序下载（适合边下边看视频）</string>
+    <string name="add_save_to">保存到</string>
+    <string name="add_save_to_value">保存到：%1$s</string>
+    <string name="add_error_invalid">请填写有效的磁力链接或 info-hash</string>
+    <string name="add_failed_title">添加失败</string>
+    <string name="add_failed_msg">链接无法解析，或该任务已经在列表里了。</string>
+
+    <!-- ============ Toast ============ -->
+    <string name="toast_added_from_link">已加入下载队列</string>
+    <string name="toast_added_torrent">已添加种子文件：</string>
+    <string name="toast_file_read_failed">读取文件失败</string>
+    <string name="toast_recheck_started">已开始重新校验</string>
+    <string name="toast_magnet_copied">磁力链接已复制</string>
+    <string name="toast_copy_failed">复制失败</string>
+    <string name="toast_deleted">任务与文件已删除</string>
+    <string name="toast_task_removed">任务已移除，文件保留</string>
+    <string name="toast_priorities_applied">已应用文件选择</string>
+
+    <!-- ============ 详情页 ============ -->
+    <string name="detail_title">任务详情</string>
+    <string name="detail_save_path">保存位置</string>
+    <string name="detail_files">文件列表（关掉不想下的文件）</string>
+    <string name="detail_files_pending">还没有拿到文件列表，等元数据到达后会自动显示。</string>
+    <string name="detail_sequential">顺序下载</string>
+    <string name="delete_title">删除任务</string>
+    <string name="delete_message">要同时删掉已经下载的文件吗？这个操作不可恢复。</string>
+    <string name="delete_with_files">任务和文件都删除</string>
+    <string name="delete_task_only">只删除任务</string>
+
+    <!-- ============ 设置页 ============ -->
+    <string name="settings_title">设置</string>
+    <string name="settings_speed_header">速度</string>
+    <string name="settings_down_limit">下载限速</string>
+    <string name="settings_up_limit">上传限速</string>
+    <string name="settings_limit_helper">填 0 表示不限速（推荐）</string>
+    <string name="settings_upload_helper">别急着压上传：BT 是互惠协议，上传被限会连带拖慢下载</string>
+    <string name="settings_max_conn">最大连接数</string>
+    <string name="settings_max_conn_helper">默认 800。手机 BT 慢，八成是这里太小。</string>
+    <string name="settings_conn_need_restart">连接数已保存，重启应用后完全生效</string>
+    <string name="settings_behavior_header">行为</string>
+    <string name="settings_sequential">新任务默认顺序下载</string>
+    <string name="settings_wifi_only">仅在 Wi-Fi 下下载</string>
+    <string name="settings_seed_after">下载完成后继续做种</string>
+    <string name="settings_notify">显示常驻进度通知</string>
+    <string name="settings_storage_header">保存位置</string>
+    <string name="settings_current_dir">当前：%1$s</string>
+    <string name="settings_pick_dir">选择目录</string>
+    <string name="settings_reset_dir">恢复默认</string>
+    <string name="settings_dir_reset_done">已恢复默认保存位置</string>
+    <string name="settings_saf_unsupported">暂不支持自选目录：libtorrent 需要真实文件路径，选择器给的 content:// 用不了。默认目录已可直接使用。</string>
+    <string name="settings_about">设备架构：%1$s\n下载内核：%2$s\n\n本应用是一个通用 BitTorrent 客户端，自身不提供任何资源索引或下载源。请只用于下载你有权获取的内容。</string>
+    <string name="settings_engine_ok">libtorrent 已加载</string>
+    <string name="settings_engine_fail">libtorrent 未加载（本机架构可能不在打包范围内）</string>
+
+    <!-- ============ 通知 ============ -->
+    <string name="channel_progress">下载进度</string>
+    <string name="channel_done">下载完成</string>
+    <string name="channel_error">下载错误</string>
+    <string name="notif_idle">空闲中</string>
+    <string name="notif_all_done">全部完成</string>
+    <string name="notif_done_count">已完成 %1$d 个任务</string>
+    <string name="notif_finished_title">下载完成</string>
+
+    <!-- ============ 内核加载失败 ============ -->
+    <string name="native_failed_title">下载内核未能加载</string>
+    <string name="native_failed_msg">无法加载 libtorrent 原生库。\n\n本机架构：%1$s\n错误信息：%2$s\n\n请确认安装的 APK 包含该架构（默认只打包 arm64-v8a）。</string>
+    <string name="error_no_source">缺少磁力链接，无法恢复该任务</string>
+</resources>

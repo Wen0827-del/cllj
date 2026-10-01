@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式下把状态文字调亮一点，保证对比度 -->
+    <color name="state_normal">#9AA0A6</color>
+    <color name="state_done">#81C995</color>
+    <color name="state_error">#F28B82</color>
+</resources>

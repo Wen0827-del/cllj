@@ -1,0 +1,26 @@
+# GitHub 走 443 端口（对抗运营商对 22 端口的限速与 QoS）
+#
+# 用法：把本文件内容合并到你的 ~/.ssh/config
+#       Windows: C:\Users\<你>\.ssh\config
+#
+# 作用：让所有 github.com 的 git 操作自动改走 ssh.github.com:443。
+#       地址栏里你照常写 git@github.com:用户名/仓库.git，不用改任何命令。
+#
+# 注意：本文件只影响 github.com，不会动你其他的 SSH 配置。
+
+Host github.com
+    HostName ssh.github.com
+    Port 443
+    User git
+    # 保持连接，避免每次操作重新握手（国内握手很贵）
+    ServerAliveInterval 30
+    ServerAliveCountMax 6
+    # 优先用已登记的密钥；如果你用我们生成的那把，写它的完整路径
+    # IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly no
+
+# 有些环境连 443 也被干扰，可以再留一条 22 的备用（把上面整段注释掉即可切回）
+# Host github.com
+#     HostName github.com
+#     Port 22
+#     User git

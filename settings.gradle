@@ -1,0 +1,38 @@
+// ---------------------------------------------------------------------------
+// 依赖仓库配置
+//
+// 默认用官方源。GitHub Actions 的 runner 在机房里，访问 google() / mavenCentral()
+// 是内网直连，很快 —— 所以云编译不需要动这里。
+//
+// 只有「你本机自己编译」时才需要考虑换镜像：把下面 MIRRORS 里的注释打开，
+// 并把上面两处 google() / mavenCentral() 注释掉即可。
+// ---------------------------------------------------------------------------
+
+pluginManagement {
+    repositories {
+        // ===== 国内本机编译时启用（云编译不需要）=====
+        // maven { url 'https://maven.aliyun.com/repository/google' }
+        // maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        // maven { url 'https://maven.aliyun.com/repository/public' }
+        // maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        // ===== 国内本机编译时启用（云编译不需要）=====
+        // maven { url 'https://maven.aliyun.com/repository/google' }
+        // maven { url 'https://maven.aliyun.com/repository/public' }
+
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "MagnetRush"
+include ':app'

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_primary">#1565C0</color>
+    <color name="brand_primary_dark">#0D47A1</color>
+    <color name="brand_secondary">#00897B</color>
+    <color name="ic_launcher_background">#0D47A1</color>
+
+    <!-- 状态文字颜色 -->
+    <color name="state_normal">#5F6368</color>
+    <color name="state_done">#1E8E3E</color>
+    <color name="state_error">#D93025</color>
+</resources>

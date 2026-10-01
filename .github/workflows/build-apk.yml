@@ -1,0 +1,100 @@
+name: Build APK
+
+# 三种触发方式：
+#   1. 手动点 Actions 页面的 "Run workflow"（首次需要这样点一下）
+#   2. 往 main 分支提交代码
+#   3. 创建 Release 时自动把 APK 挂上去
+on:
+  workflow_dispatch:
+    inputs:
+      abis:
+        description: '要打包的 CPU 架构，逗号分隔（可选 arm64-v8a / armeabi-v7a / x86 / x86_64）'
+        required: false
+        default: 'arm64-v8a'
+        type: string
+  push:
+    branches: [ main, master ]
+    paths-ignore:
+      - '**.md'
+  release:
+    types: [ created ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Assemble APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    # 注意：本仓库的 Gradle 工程位于 MagnetRush/ 子目录下
+    defaults:
+      run:
+        working-directory: MagnetRush
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Resolve ABIs
+        id: abis
+        run: |
+          ABI="${{ github.event.inputs.abis }}"
+          if [ -z "$ABI" ]; then ABI="arm64-v8a"; fi
+          echo "value=$ABI" >> "$GITHUB_OUTPUT"
+          echo "Building for: $ABI"
+
+      - name: Build debug APK
+        run: gradle :app:assembleDebug -Pabis=${{ steps.abis.outputs.value }} --no-daemon --stacktrace
+
+      - name: Build release APK (unsigned)
+        run: gradle :app:assembleRelease -Pabis=${{ steps.abis.outputs.value }} --no-daemon --stacktrace
+        continue-on-error: true
+
+      - name: Collect APKs
+        run: |
+          mkdir -p out
+          find app/build/outputs/apk -name '*.apk' -exec cp -v {} out/ \;
+          ls -lh out/
+
+      - name: Rename artifacts
+        run: |
+          cd out
+          for f in *.apk; do
+            case "$f" in
+              *debug*) mv "$f" "MagnetRush-debug-${{ steps.abis.outputs.value }}.apk" ;;
+              *release*) mv "$f" "MagnetRush-release-unsigned-${{ steps.abis.outputs.value }}.apk" ;;
+            esac
+          done
+          ls -lh
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MagnetRush-APK-${{ steps.abis.outputs.value }}
+          path: MagnetRush/out/*.apk
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Attach to release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: MagnetRush/out/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
